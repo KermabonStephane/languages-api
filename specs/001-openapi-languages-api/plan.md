@@ -22,7 +22,7 @@ This document outlines the implementation plan for the OpenAPI Languages API. Th
 **Storage**: PostgreSQL  
 **Testing**: Spock Framework, ArchUnit  
 **Target Platform**: Linux server
-**Project Type**: Web application  
+**Project Type**: Rest API  
 **Performance Goals**: p95 response time < 500ms for list, < 200ms for single.  
 **Constraints**: Sorting, pagination, and filtering should not add more than 200ms to the response time.  
 **Scale/Scope**: The API should be able to handle 1000 requests per second.
@@ -72,11 +72,11 @@ backend/
 │   │   │               │   ├── in/
 │   │   │               │   │   └── web/
 │   │   │               │   └── out/
-│   │   │               │       └── persistence/
+│   │   │               │       └── jpa/
 │   │   │               ├── application/
 │   │   │               │   ├── port/
-│   │   │               │   │   ├── in/
-│   │   │               │   │   └── out/
+│   │   │               │   │   ├── web/
+│   │   │               │   │   └── jpa/
 │   │   │               │   └── service/
 │   │   │               ├── domain/
 │   │   │               └── common/
