@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: Languages API
+  version: 1.0.0
+paths:
+  /languages:
+    get:
+      summary: List all languages
+      parameters:
+        - name: sort
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: filter
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of languages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Language'
+  /languages/{code}:
+    get:
+      summary: Get a specific language
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A single language
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Language'
+        '404':
+          description: Language not found
+components:
+  schemas:
+    Language:
+      type: object
+      properties:
+        englishName:
+          type: string
+        englishNames:
+          type: array
+          items:
+            type: string
+        frenchNames:
+          type: array
+          items:
+            type: string
+        iso639_2:
+          type: string
+        iso639_1:
+          type: string

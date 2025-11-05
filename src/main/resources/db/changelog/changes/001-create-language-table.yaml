@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: stephane.kermabon
+      changes:
+        - createTable:
+            tableName: language
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: english_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: iso639_1
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: iso639_2
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createTable:
+            tableName: language_english_names
+            columns:
+              - column:
+                  name: language_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: english_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: language_french_names
+            columns:
+              - column:
+                  name: language_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: french_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: language_english_names
+            baseColumnNames: language_id
+            constraintName: fk_language_english_names_language
+            referencedTableName: language
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: language_french_names
+            baseColumnNames: language_id
+            constraintName: fk_language_french_names_language
+            referencedTableName: language
+            referencedColumnNames: id
